@@ -13,15 +13,15 @@ const adj = ['Green', 'Black', 'Oolong', 'Lychee', 'Rose', 'White', 'Herbal', 'Y
 //   return this.create({ name});
 // };
 
-const Teas = ({ teas, createTea, deleteTea }) => {
+const Teas = ({ teas, create, destroy }) => {
   return (
     <div>
       <h4> 🍵 Tea Options 🍵 </h4>
-      <button id='CreateButton' onClick={() => createTea(adj[Math.floor(Math.random() * adj.length)])}> Create Tea </button>
+      <button id='CreateButton' onClick={() => create(adj[Math.floor(Math.random() * adj.length)])}> Create Tea </button>
       <ul >
         {teas.map((tea) => {
           return <li key={tea.id}>{tea.name}
-          <button onClick={()=>deleteTea(tea)}> x </button></li>;
+          <button onClick={()=>destroy(tea)}> x </button></li>;
         })}
       </ul>
     </div>
@@ -32,10 +32,10 @@ const mapState = (state) => state;
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createTea: (name) => {
+    create: (name) => {
       dispatch(createTea(name));
     },
-    destory: (teas) => {
+    destroy: (teas) => {
       dispatch(deleteTea(teas));
     }
   };

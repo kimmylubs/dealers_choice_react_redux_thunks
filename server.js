@@ -1,7 +1,6 @@
 const express = require("express");
 const { static } = express;
 const path = require("path");
-const { user } = require("pg/lib/defaults");
 const {
   syncAndSeed,
   models: { Tea, Topping, Milk },
@@ -38,12 +37,13 @@ app.post("/api/teas", async (req, res, next) => {
 app.delete("/api/teas/:id", async (req, res, next) => {
   try {
     const tea = await Tea.findByPk(req.params.id);
-    await user.destroy();
+    await tea.destroy();
     res.sendStatus(204);
   } catch (e) {
-    next(e);
+    console.log(e);
   }
 });
+
 
 app.get("/api/toppings", async (req, res, next) => {
   try {
