@@ -1,10 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
+import { createMilk } from "./store";
 
-const Milk = ({ milks }) => {
+const adj = ["Soy", "Low-Fat", "Rice", "Coconut", "Cashew"];
+
+const Milk = ({ milks, createMilk }) => {
   return (
     <div>
-        Milk Options
+      <h4> 🥛 Milk Options 🥛</h4>
+      <button id="CreateButton" onClick={() => createMilk(adj[Math.floor(Math.random() * adj.length)])}>
+        Create Milk
+      </button>
       <ul>
         {milks.map((milk) => {
           return <li key={milk.id}>{milk.name}</li>;
@@ -14,4 +20,12 @@ const Milk = ({ milks }) => {
   );
 };
 
-export default connect(state => state)(Milk);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createMilk: (name) => {
+      dispatch(createMilk(name));
+    },
+  };
+};
+
+export default connect((state) => state, mapDispatchToProps)(Milk);

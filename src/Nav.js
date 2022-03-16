@@ -3,11 +3,13 @@ import { connect } from "react-redux";
 
 const Nav = ({ teas, toppings, milks }) => {
   return (
-    <nav>
-      <a href="#teas">Teas ({teas.length})</a>
-      <a href="#toppings">Toppings ({toppings.length}) </a>
-      <a href="#milks">Milks ({milks.length}) </a>
-    </nav>
+    <div>
+      <nav>
+        <a href="#teas">Pick A Tea!</a> 
+        <a href="#toppings">Pick Toppings! </a>
+        <a href="#milks">Pick A Milk!</a>
+      </nav>
+    </div>
   );
 };
 

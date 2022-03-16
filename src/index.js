@@ -40,11 +40,12 @@ const App = connect(
       const { view } = this.props;
       return (
         <div>
+          <h2> 🧋 Double Bubble Trouble 🧋 </h2>
           <Nav />
           <br />
-            {view === "teas" && <Tea />}
-            {view === "toppings" && <Toppings />}
-            {view === "milks" && <Milk />}
+          {view === "teas" && <Tea />}
+          {view === "toppings" && <Toppings />}
+          {view === "milks" && <Milk />}
         </div>
       );
     }

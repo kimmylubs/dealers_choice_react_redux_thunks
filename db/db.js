@@ -13,6 +13,18 @@ const Milk = sequelize.define("milk", {
   name: Sequelize.STRING,
 });
 
+// const adj = ['Green', 'Black', 'Oolong', 'Lychee', 'Rose', 'White', 'Herbal', 'Yellow', 'Blue', 'Guayusa', 'Puerh', 'Chamomile', 'Ginger', 'Hibisuc', 'Lemon', 'PassionFlower', 'Peppermint', 'Exhiancea', 'Rooibos', 'Rosehip', 'Chai', 'Dandelion', 'ElderBerry'];
+
+// function generator() {
+//  return adj[Math.floor(Math.random() * adj.length)];;;
+// }
+
+// Tea.generateRandom = function () {
+//   const name = generator();
+//   return this.create({ name});
+// };
+
+
 const syncAndSeed = async () => {
   await sequelize.sync({ force: true });
   await Promise.all([
@@ -23,7 +35,7 @@ const syncAndSeed = async () => {
   ]),
     await Promise.all([
       Topping.create({ name: "Tapioca" }),
-      Topping.create({ name: "Jelly" }),
+      Topping.create({ name: "Peach Jelly" }),
       Topping.create({ name: "Sago" }),
       Topping.create({ name: "Aloe" }),
     ]),
@@ -32,14 +44,14 @@ const syncAndSeed = async () => {
       Milk.create({ name: "Skim" }),
       Milk.create({ name: "Almond" }),
       Milk.create({ name: "Oat" }),
-    ])
+    ]);
 };
 
 module.exports = {
-    syncAndSeed,
-    models: {
-        Tea,
-        Topping,
-        Milk
-    }
+  syncAndSeed,
+  models: {
+    Tea,
+    Topping,
+    Milk,
+  },
 };
