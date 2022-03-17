@@ -7,6 +7,7 @@ import Toppings from "./Toppings";
 import Tea from "./Tea";
 import Milk from "./Milk";
 import Nav from "./Nav";
+import Basket from "./Basket";
 
 const App = connect(
   (state) => {
@@ -42,10 +43,10 @@ const App = connect(
         <div>
           <h2> 🧋 Double Bubble Trouble 🧋 </h2>
           <Nav />
-          <br />
           {view === "teas" && <Tea />}
           {view === "toppings" && <Toppings />}
           {view === "milks" && <Milk />}
+          <Basket />
         </div>
       );
     }
