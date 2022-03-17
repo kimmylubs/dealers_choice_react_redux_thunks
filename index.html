@@ -9,11 +9,16 @@
     <link rel="stylesheet" src="style.css" />
     <style>
         body {
-            font: 15px, fantasy;
+            font-family: fantasy;
+            font-size: 20px;
+            font-weight: bold;
             background-color: pink;
+            display: flex;
+            justify-content: space-around;
         }
 
-        nav,h2 {
+        nav,
+        h2 {
             display: flex;
             justify-content: space-around;
         }
@@ -25,13 +30,21 @@
         }
 
         #CreateButton {
-            padding: 10px 20px;
+            font-size: 15px;
+            height: 40px;
+            width: 150px;
             text-align: center;
+        }
+
+        #xButton {
+            font-size: 15px;
+            position: absolute;
+            right: 45%;
+
         }
 
         ul {
             list-style-type: none;
-            display: inline-table;
         }
     </style>
 </head>

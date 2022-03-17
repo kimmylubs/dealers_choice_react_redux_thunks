@@ -1,29 +1,36 @@
 import React from "react";
 import { connect } from "react-redux";
-import { createTopping } from "./store";
+import { createTopping, deleteTopping } from "./store";
 
 const adj = ["Black Jelly",'White Jelly','Lychee Jelly','Popping Jelly','Brown Boba'] 
 
-const Topping = ({ toppings, createTopping }) => {
+const Topping = ({ toppings, create, destroy }) => {
   return (
     <div>
-      <h4> Topping Options (ﾉ◕ヮ◕)ﾉ*✲ﾟ*｡⋆</h4>
-      <button id='CreateButton' onClick={() => createTopping(adj[Math.floor(Math.random() * adj.length)])}>Create Topping </button>
+      <h4> (ﾉ◕ヮ◕)ﾉ Topping Options ヽ(◕ヮ◕ヽ)</h4>
+      <button id='CreateButton' onClick={() => create(adj[Math.floor(Math.random() * adj.length)])}>Create Topping </button>
       <ul >
         {toppings.map((topping) => {
-          return <li key={topping.id}>{topping.name}</li>;
+          return <li key={topping.id}>{topping.name}
+          <button id='xButton' onClick={()=>destroy(topping)}> x </button>
+          </li>;
         })}
       </ul>
     </div>
   );
 };
 
+const mapState = (state) => state;
+
 const mapDispatchToProps = (dispatch) => {
   return {
-    createTopping: (name) => {
+    create: (name) => {
       dispatch(createTopping(name));
     },
+    destroy: (topping) => {
+      dispatch(deleteTopping(topping));
+    }
   };
 };
 
-export default connect((state) => state, mapDispatchToProps)(Topping);
+export default connect(mapState, mapDispatchToProps)(Topping);

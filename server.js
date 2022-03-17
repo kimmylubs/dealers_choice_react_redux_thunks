@@ -44,7 +44,6 @@ app.delete("/api/teas/:id", async (req, res, next) => {
   }
 });
 
-
 app.get("/api/toppings", async (req, res, next) => {
   try {
     res.send(await Topping.findAll());
@@ -58,6 +57,16 @@ app.post("/api/toppings", async (req, res, next) => {
     res.status(201).send(await Topping.create(req.body));
   } catch (e) {
     next(e);
+  }
+});
+
+app.delete("/api/toppings/:id", async (req, res, next) => {
+  try {
+    const topping = await Topping.findByPk(req.params.id);
+    await topping.destroy();
+    res.sendStatus(204);
+  } catch (e) {
+    console.log(e);
   }
 });
 
@@ -76,6 +85,17 @@ app.post("/api/milks", async (req, res, next) => {
     next(e);
   }
 });
+
+app.delete("/api/milks/:id", async (req, res, next) => {
+  try {
+    const milk = await Milk.findByPk(req.params.id);
+    await milk.destroy();
+    res.sendStatus(204);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
 
 const init = async () => {
   try {

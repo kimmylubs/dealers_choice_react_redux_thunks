@@ -23,6 +23,8 @@ const _createTea = (tea) => ({ type: CREATE_TEA, tea });
 const _createTopping = (topping) => ({ type: CREATE_TOPPING, topping });
 const _createMilk = (milk) => ({ type: CREATE_MILK, milk });
 const _deleteTea = (tea) => ({ type: DELETE_TEA, tea });
+const _deleteTopping = (topping) => ({ type: DELETE_TOPPING, topping});
+const _deleteMilk = (milk) => ({ type: DELETE_MILK, milk });
 
 // FUNCTIONS (read with applyMiddleWare and redux-thunk)
 
@@ -50,9 +52,24 @@ const createMilk = (name) => {
 const deleteTea = (tea) => {
   return async (dispatch) => {
     await axios.delete(`/api/teas/${tea.id}`);
-    dispatch({ type: "DESTROY_TEA", tea });
+    dispatch(_deleteTea(tea));
   };
 };
+
+const deleteTopping = (topping) => {
+  return async (dispatch) => {
+    await axios.delete(`/api/toppings/${topping.id}`);
+    dispatch(_deleteTopping(topping));
+  };
+};
+
+const deleteMilk = (milk) => {
+  return async (dispatch) => {
+    await axios.delete(`/api/milks/${milk.id}`);
+    dispatch(_deleteMilk(milk));
+  };
+};
+
 // COMBINE REDUCERS
 
 const teaReducer = (state = [], action) => {
@@ -63,7 +80,7 @@ const teaReducer = (state = [], action) => {
   if (action.type === CREATE_TEA) {
     state = [...state, action.tea];
   }
-  if (action.type === "DESTROY_TEA") {
+  if (action.type === DELETE_TEA) {
     const teas = state.filter((tea) => tea.id !== action.tea.id);
     return teas;
   }
@@ -77,6 +94,10 @@ const toppingReducer = (state = [], action) => {
   if (action.type === CREATE_TOPPING) {
     state = [...state, action.topping];
   }
+  if (action.type === DELETE_TOPPING) {
+    const toppings = state.filter((topping) => topping.id !== action.topping.id);
+    return toppings;
+  }
   return state;
 };
 
@@ -86,6 +107,10 @@ const milkReducer = (state = [], action) => {
   }
   if (action.type === CREATE_MILK) {
     state = [...state, action.milk];
+  }
+  if (action.type === DELETE_MILK) {
+    const milks = state.filter((milk) => milk.id !== action.milk.id);
+    return milks;
   }
   return state;
 };
@@ -119,4 +144,6 @@ export {
   createTopping,
   createMilk,
   deleteTea,
+  deleteTopping,
+  deleteMilk
 };

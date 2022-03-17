@@ -20,8 +20,8 @@ const Teas = ({ teas, create, destroy }) => {
       <button id='CreateButton' onClick={() => create(adj[Math.floor(Math.random() * adj.length)])}> Create Tea </button>
       <ul >
         {teas.map((tea) => {
-          return <li key={tea.id}>{tea.name}
-          <button onClick={()=>destroy(tea)}> x </button></li>;
+          return <li key={tea.id}>{tea.name} 
+          <button id='xButton' onClick={()=>destroy(tea)}> x </button></li>;
         })}
       </ul>
     </div>
@@ -35,8 +35,8 @@ const mapDispatchToProps = (dispatch) => {
     create: (name) => {
       dispatch(createTea(name));
     },
-    destroy: (teas) => {
-      dispatch(deleteTea(teas));
+    destroy: (tea) => {
+      dispatch(deleteTea(tea));
     }
   };
 };

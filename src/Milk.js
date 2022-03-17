@@ -1,31 +1,38 @@
 import React from "react";
 import { connect } from "react-redux";
-import { createMilk } from "./store";
+import { createMilk, deleteMilk } from "./store";
 
 const adj = ["Soy", "Low-Fat", "Rice", "Coconut", "Cashew"];
 
-const Milk = ({ milks, createMilk }) => {
+const Milk = ({ milks, create, destroy }) => {
   return (
     <div>
       <h4> 🥛 Milk Options 🥛</h4>
-      <button id="CreateButton" onClick={() => createMilk(adj[Math.floor(Math.random() * adj.length)])}>
+      <button id="CreateButton" onClick={() => create(adj[Math.floor(Math.random() * adj.length)])}>
         Create Milk
       </button>
       <ul>
         {milks.map((milk) => {
-          return <li key={milk.id}>{milk.name}</li>;
+          return <li key={milk.id}>{milk.name}
+          <button id='xButton' onClick={()=>destroy(milk)}> x </button>
+          </li>;
         })}
       </ul>
     </div>
   );
 };
 
+const mapState = (state) => state;
+
 const mapDispatchToProps = (dispatch) => {
   return {
-    createMilk: (name) => {
+    create: (name) => {
       dispatch(createMilk(name));
     },
+    destroy: (milk) => {
+      dispatch(deleteMilk(milk));
+    }
   };
 };
 
-export default connect((state) => state, mapDispatchToProps)(Milk);
+export default connect(mapState, mapDispatchToProps)(Milk);
